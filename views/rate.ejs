@@ -1,0 +1,126 @@
+<html>
+<title>Rate</title>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link href="dependencies/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-slider.css" rel="stylesheet">
+<style>
+	li{
+		border-right: 2px double #DDDDDD;
+	}
+	
+	
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #50555C;
+  background: #50555C;
+  border-radius: 50px;
+  border: 0px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 7px;
+  width: 30px;
+  border-radius: 50px;
+  background: #20BD4A;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -0.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #50555C;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #50555C;
+  background: #50555C;
+  border-radius: 50px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 7px;
+  width: 30px;
+  border-radius: 50px;
+  background: #20BD4A;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #50555C;
+  border: 0px solid #000000;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px #50555C;
+}
+input[type=range]::-ms-fill-upper {
+  background: #50555C;
+  border: 0px solid #000000;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px #50555C;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 7px;
+  width: 30px;
+  border-radius: 50px;
+  background: #20BD4A;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #50555C;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #50555C;
+}
+</style>
+<script>
+function goBack() {window.history.back();}
+</script>
+<body>
+
+<div class="w3-container w3-teal">
+  <h1>Rate</h1>
+</div>
+<ul class="w3-navbar w3-light-grey" style=" box-shadow: 2px 2px 2px #888888;">
+	<li><a style="color:#555555" href="" onclick="goBack()">Back to List</a></li>
+</ul>
+
+<div class="w3-quarter w3-container">
+</div>
+
+<div class="w3-container w3-half" style="margin-top:10%">
+<center><form class="w3-container w3-card-4" action='/rateProcess?_id=<%= rid %>' method='post'>
+	<br>
+	<input type="range" name="rate" id="Input" value="5" min="1" max="10" oninput="Output.value = Input.value"><br>
+	Score:<output name="Output" id="Output">5</output> (1-10)
+	<hr>
+	<p><input class="w3-btn w3-section w3-teal w3-ripple" type='submit' value='Submit'></p>
+</form></center>
+</div>
+
+</body>
+</html>

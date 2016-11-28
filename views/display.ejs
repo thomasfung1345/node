@@ -1,0 +1,78 @@
+
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<title><%= list.name %></title>
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+</head>
+<body>
+<script>
+function goBack() {window.history.back();}
+</script>
+<script>
+function loadMap ()
+{
+  var myLatLng = {lat: , lng: };
+  //var myLatLng = new google.maps.LatLng({lat: , lng: });
+  var map = new google.maps.Map(document.getElementById("map"),{
+        zoom: 18,
+        center: myLatLng
+  });
+  var marker = new google.maps.Marker({
+     position: myLatLng,
+     map: map,
+     title: list.borough
+  });
+}
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkfp0OSPZ0fl8ZF3a0tea-mp36-mp_8b8&callback=loadMap"></script>
+<div class="w3-container w3-teal">
+  <h1><%= list.name %></h1>
+</div>
+<ul class="w3-navbar w3-light-grey" style=" box-shadow: 2px 2px 2px #888888;">
+	<li><a style="color:#555555" href="" onclick="goBack()">Back to List</a></li>
+	<li><a style="color:#555555" href="/rate?_id=<%= list._id%>">Rate</a></li>
+	<li><a style="color:#555555" href="">Edit</a></li>
+	<li><a style="color:#555555" href="">Delete</a></li>
+</ul>
+
+<div class="w3-container">
+<p>
+<center><%= (!list.photo)?"(Image not avaliable)":list.photo %></p></center>
+<label class="w3-label w3-validate">Borough: <%= (!list.borough)?"":list.borough  %></label></p>
+<label class="w3-label w3-validate">Cuisine: <%= (!list.cuisine)?"":list.cuisine %></label></p>
+<label class="w3-label w3-validate">Street: <%= (!list.street)?"":list.street %></label></p>
+<label class="w3-label w3-validate">Building: <%= (!list.building)?"":list.building %></label></p>
+<label class="w3-label w3-validate">Zipcode: <%= (!list.zipcode)?"":list.zipcode %></label></p>
+<label class="w3-label w3-validate">GPS: </label>[<%= (!list.gps[0])?"":list.gps[0] %>,<%= (!list.gps[1])?"":list.gps[1] %>]</p>
+<label class="w3-label w3-validate">Rating: </label></p>
+<ol>
+        <% if(list.rate){%>
+      	<% for(var i=0; i<list.rate.length; i++){ %>
+		<li><%= list.rate[i].score %></li>
+		<% }} %>
+
+</ol>
+
+<p>
+<label class="w3-label w3-validate">Created by: </label><%= creatorName %></p>
+<p>
+</div>
+
+</body>
+</html>
