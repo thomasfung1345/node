@@ -3,7 +3,7 @@ var app = express();
 var session = require('cookie-session');
 var assert = require('assert');
 /* CHANGED. -- Wong(2016)*/
-var mongourl = 'mongodb://tdnodejs:a123456@ds159747.mlab.com:59747/project'; 
+var mongourl = 'mongodb://tdnodejs:a123456@ds159747.mlab.com:59747/project';
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 var bodyParser = require('body-parser');
@@ -38,7 +38,7 @@ app.post("/login", function(req,res) {
 		db.collection('account').findOne({acc:acc, pwd:pwd}, function(err, user) {
 			if(err)
 				throw err;
-			
+
 			if(!user){
 				res.redirect('/login');
 				console.log("a login attempt failed");
@@ -48,8 +48,8 @@ app.post("/login", function(req,res) {
 				req.session.uid = id;
 				res.redirect('/read');
 			}
-			
-			
+
+
 		});
 		db.close();
 	});
@@ -91,7 +91,7 @@ app.post("/rateProcess", function(req,res) {
 	rid = req.query._id;
 	console.log(rid);
 	MongoClient.connect(mongourl, function(err, db) {
-		
+
 		db.collection('restaurant').findOne({"_id":ObjectId(rid) , "rate":{$elemMatch:{"user":uid}}} , function(err,match){
 			if(!match){
 				db.collection('restaurant').update({"_id":ObjectId(rid)},{$push:{"rate":{"user":uid,"score":score}}},function(err,object){
@@ -102,7 +102,7 @@ app.post("/rateProcess", function(req,res) {
 						db.close();
 						res.redirect('/display?_id='+rid);
 					}
-					
+
 				});
 			}else{
 				db.close();
@@ -125,14 +125,59 @@ app.get("/display", function(req,res) {
 				});
 			});
 		});
-		
+
 	}
-	
-	
-	
 });
 
+app.get("/account", function(req,res) {
+		res.render('account');
+	});
 
+app.post("/account", function(req,res) {
+
+	var success = 0;
+	console.log("account " + req.body.name);
+	console.log("account " + req.body.pw);
+	MongoClient.connect(mongourl,function(err,db) {
+      console.log('Connected to MongoDB\n');
+      assert.equal(null,err);
+						if(!match){
+     create(db,req.body.name,req.body.pw,function(result) {
+
+          if (result.insertedId != null) {
+            res.status(200);
+            res.end('Inserted: ' + result.insertedId);
+						//res.write("Account creation sucessful");
+							db.close();
+
+          } else {
+            res.status(500);
+            res.end(JSON.stringify(result));
+						res.write("Account creation failed");
+						db.close();
+						res.redirect('/account');
+          }
+      });
+  }
+	});
+	res.render('account');
+});
+function create(db,name,pw,callback) {
+
+  db.collection('account').insertOne({
+    "acc" : name,
+    "pwd" : pw,
+  }, function(err,result) {
+    //assert.equal(err,null);
+    if (err) {
+      result = err;
+      console.log("insertOne error: " + JSON.stringify(err));
+    } else {
+      console.log("Inserted _id = " + result.insertedId);
+    }
+    callback(result);
+  });
+};
 
 
 app.listen(process.env.PORT || 8099);
