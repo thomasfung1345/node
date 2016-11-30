@@ -141,7 +141,7 @@ app.post("/account", function(req,res) {
 	MongoClient.connect(mongourl,function(err,db) {
       console.log('Connected to MongoDB\n');
       assert.equal(null,err);
-						if(!match){
+					
      create(db,req.body.name,req.body.pw,function(result) {
 
           if (result.insertedId != null) {
@@ -158,7 +158,7 @@ app.post("/account", function(req,res) {
 						res.redirect('/account');
           }
       });
-  }
+
 	});
 	res.render('account');
 });
