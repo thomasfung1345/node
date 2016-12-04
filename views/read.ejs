@@ -5,6 +5,15 @@
 		li{
 			border-right: 2px double #DDDDDD;
 		}
+		.unselectable {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
@@ -13,14 +22,18 @@
 	</div>
 	<ul class="w3-navbar w3-light-grey" style=" box-shadow: 2px 2px 2px #888888;">
 		<li><a style="color:#555555" href="./new">Add Restaurant</a></li>
+
+
+		<li class="w3-right"><a class="w3-red" href="./logout">Log Out</a></li>
 	</ul>
-	<hr>
-	<center><%= list.length %> results</center>
-	<hr>
-	<ul class="w3-ul w3-hoverable">
+
+	
+
+	<ul class="w3-ul w3-card-4 w3-hoverable">
 		<% for(var i=0; i<list.length; i++){ %>
-		<a href="./display?_id=<%=list[i]._id%>"><li><%= list[i].name%></li></a>
+		<li class="w3-padding-16 unselectable" onclick="location.href='./display?_id=<%=list[i]._id%>';"><%= list[i].name%></li>
 		<% } %>
 	</ul>
-	
+	<hr>
+	<center><%= list.length %> result(s)</center>
 </body>

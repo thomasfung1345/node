@@ -113,7 +113,11 @@ function goBack() {window.history.back();}
 </div>
 
 <div class="w3-container w3-half" style="margin-top:10%">
-<center><form class="w3-container w3-card-4" action='/rateProcess?_id=<%= rid %>' method='post'>
+<center>
+	<header class="w3-container w3-card-4 w3-white">
+	  <h2 align="left">give rating to <%=name%></h2>
+	</header>
+	<form class="w3-container w3-card-4" action='/rateProcess?_id=<%= rid %>' method='post'>
 	<br>
 	<input type="range" name="rate" id="Input" value="5" min="1" max="10" oninput="Output.value = Input.value"><br>
 	Score:<output name="Output" id="Output">5</output> (1-10)

@@ -11,8 +11,9 @@
 <header class="w3-container w3-teal">
   <h1>User account creation</h1>
 </header>
-<form class="w3-container w3-card-4"  action='/account' method='post'>
 
+<form class="w3-container w3-card-4"  action='/account' method='post'>
+<label class="w3-label w3-text-red"><%= failed %></label>
 <p>
 <input name="name" class="w3-input" type="text" style="width:90%" required>
 <label class="w3-label w3-validate">User name</label></p>
@@ -24,9 +25,6 @@
 
 </form>
 
-<br>
-<br>
-<br>
 </div>
 </body>
 </html>
