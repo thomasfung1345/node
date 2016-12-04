@@ -119,10 +119,10 @@ app.get("/read", function(req,res) {
 	if(!req.session.uid)
 		res.redirect('/');
 	else{
-		console.log(req.query);
 		MongoClient.connect(mongourl, function(err, db) {
 			db.collection('resInfo').find(req.query,{name:1,_id:1}).toArray(function(err,items){
-				res.render('read',{list: items});
+				console.log(req.query);
+				res.render('read',{list: items, name: req.session.uid, criteria:JSON.stringify(req.query)});
 			});
 		});
 	}

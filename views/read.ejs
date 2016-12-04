@@ -23,8 +23,9 @@
 	<ul class="w3-navbar w3-light-grey" style=" box-shadow: 2px 2px 2px #888888;">
 		<li><a style="color:#555555" href="./new">Add Restaurant</a></li>
 
-
+		
 		<li class="w3-right"><a class="w3-red" href="./logout">Log Out</a></li>
+		<li class="w3-right"><a><%= name %></a></li>
 	</ul>
 
 	
@@ -35,5 +36,5 @@
 		<% } %>
 	</ul>
 	<hr>
-	<center><%= list.length %> result(s)</center>
+	<center><%= list.length %> result(s),criteria: <%=criteria%></center>
 </body>
